@@ -1,7 +1,6 @@
 package org.yt.jr.projects.alphabets;
 
 import java.security.InvalidParameterException;
-import java.util.Arrays;
 
 public enum Alphabet {
 
@@ -11,8 +10,6 @@ public enum Alphabet {
 
     private final String name;
     private final char[] symbols;
-    private final char[] PUNCTUATION = {'.', ',', '«', '»', '"', '\\', ':', '!', '?', ' '};
-
 
     Alphabet() {
         this.name = "unknown";
@@ -20,6 +17,8 @@ public enum Alphabet {
     }
 
     Alphabet(final String name, final String alphabet) {
+        char[] PUNCTUATION = {'.', ',', '«', '»', '"', '\\', ':', '!', '?', ' '};
+
         char[] alphabetChars = alphabet.toCharArray();
         if (isCharsUnique(alphabetChars)) {
             this.name = name;
