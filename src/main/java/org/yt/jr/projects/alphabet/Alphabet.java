@@ -86,8 +86,7 @@ public enum Alphabet {
     }
 
     public boolean isTextMatches(final char[] text) {
-        for (int i = 0; i < text.length; i++) {
-            char currChar = text[i];
+        for (char currChar : text) {
             if (Character.isLetter(currChar) && getSymbolPos(currChar) < 0) {
                 return false;
             }
