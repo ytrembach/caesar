@@ -11,6 +11,7 @@ public enum Alphabet {
     private final String name;
     private final char[] symbols;
     private final int alphabetLength;
+    public final char[] PUNCTUATION = {'.', ',', '«', '»', '"', '\\', ':', '!', '?', ' '};
 
     Alphabet() {
         this.name = "unknown";
@@ -19,9 +20,7 @@ public enum Alphabet {
     }
 
     Alphabet(final String name, final String letters) {
-        char[] PUNCTUATION = {'.', ',', '«', '»', '"', '\\', ':', '!', '?', ' '};
-
-        char[] alphabetChars = letters.toCharArray();
+        final char[] alphabetChars = letters.toCharArray();
         if (isCharsUnique(alphabetChars)) {
             this.name = name;
 
@@ -38,7 +37,7 @@ public enum Alphabet {
 
     private boolean isCharsUnique(final char[] chars) {
         for (int i = 0; i < chars.length - 1; i++) {
-            char testedSymbol = chars[i];
+            final char testedSymbol = chars[i];
             for (int j = i + 1; j < chars.length; j++) {
                 if (testedSymbol == chars[j]) {
                     return false;
@@ -46,10 +45,6 @@ public enum Alphabet {
             }
         }
         return true;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getAlphabetLength() {
@@ -70,7 +65,7 @@ public enum Alphabet {
             return symbol;
         }
 
-        int symbolPos = getSymbolPos(symbol);
+        final int symbolPos = getSymbolPos(symbol);
         if (symbolPos == -1) { // the symbol is not a letter or a known punctuation - pass it through
             return symbol;
         }
@@ -91,7 +86,6 @@ public enum Alphabet {
                 return false;
             }
         }
-
         return true;
     }
 
