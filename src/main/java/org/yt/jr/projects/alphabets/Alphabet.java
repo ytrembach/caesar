@@ -1,14 +1,25 @@
 package org.yt.jr.projects.alphabets;
 
 import java.security.InvalidParameterException;
+import java.util.Arrays;
 
-public class Alphabet {
+public enum Alphabet {
+
+    UNKNOWN(),
+    EN("en", "abcdefghijklmnopqrstuvwxyz"),
+    UKR("ukr", "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя");
+
     private final String name;
     private final char[] symbols;
-    private final static char[] PUNCTUATION = {'.', ',', '«', '»', '"', '\\', ':', '!', '?', ' '};
+    private final char[] PUNCTUATION = {'.', ',', '«', '»', '"', '\\', ':', '!', '?', ' '};
 
 
-    public Alphabet(final String name, final String alphabet) {
+    Alphabet() {
+        this.name = "unknown";
+        this.symbols = new char[0];
+    }
+
+    Alphabet(final String name, final String alphabet) {
         char[] alphabetChars = alphabet.toCharArray();
         if (isCharsUnique(alphabetChars)) {
             this.name = name;
@@ -50,7 +61,7 @@ public class Alphabet {
     }
 
     public char shift(final char symbol, final int offset) {
-        if (offset == 0) {
+        if (symbols.length == 0 || offset == 0) {
             return symbol;
         }
         int symbolPos = getSymbolPos(symbol);
@@ -74,5 +85,19 @@ public class Alphabet {
         return true;
     }
 
+    public static Alphabet detect(String[] text) {
+        for (Alphabet alphabet : Alphabet.values()) {
+            if (alphabet.isTextMatches(text)) {
+                return alphabet;
+            }
+        }
+        return UNKNOWN;
+    }
 
+    @Override
+    public String toString() {
+        return "Alphabet{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
