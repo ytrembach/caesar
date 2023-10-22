@@ -76,7 +76,8 @@ public enum Alphabet {
     public boolean isTextMatches(final String[] text) {
         for (String line : text) {
             for (int i = 0; i < line.length(); i++) {
-                if (getSymbolPos(line.charAt(i)) < 0) {
+                char currChar = line.charAt(i);
+                if (Character.isLetter(currChar) && getSymbolPos(currChar) < 0) {
                     return false;
                 }
             }
