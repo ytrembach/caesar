@@ -1,4 +1,4 @@
-package org.yt.jr.projects.alphabets;
+package org.yt.jr.projects.alphabet;
 
 import java.security.InvalidParameterException;
 
@@ -10,25 +10,27 @@ public enum Alphabet {
 
     private final String name;
     private final char[] symbols;
+    private final int alphabetLength;
 
     Alphabet() {
         this.name = "unknown";
+        this.alphabetLength = 0;
         this.symbols = new char[0];
     }
 
-    Alphabet(final String name, final String alphabet) {
+    Alphabet(final String name, final String letters) {
         char[] PUNCTUATION = {'.', ',', '«', '»', '"', '\\', ':', '!', '?', ' '};
 
-        char[] alphabetChars = alphabet.toCharArray();
+        char[] alphabetChars = letters.toCharArray();
         if (isCharsUnique(alphabetChars)) {
             this.name = name;
 
-            int length = alphabet.length() * 2 + PUNCTUATION.length; // small/capital letter + punctuation
-            symbols = new char[length];
+            alphabetLength = letters.length() * 2 + PUNCTUATION.length; // small letters + capital letters + punctuation
+            symbols = new char[alphabetLength];
 
-            System.arraycopy(alphabet.toUpperCase().toCharArray(), 0, symbols, 0, alphabet.length());
-            System.arraycopy(alphabet.toLowerCase().toCharArray(), 0, symbols, alphabet.length(), alphabet.length());
-            System.arraycopy(PUNCTUATION, 0, symbols, 2 * alphabet.length(), PUNCTUATION.length);
+            System.arraycopy(letters.toUpperCase().toCharArray(), 0, symbols, 0, letters.length());
+            System.arraycopy(letters.toLowerCase().toCharArray(), 0, symbols, letters.length(), letters.length());
+            System.arraycopy(PUNCTUATION, 0, symbols, 2 * letters.length(), PUNCTUATION.length);
         } else {
             throw new InvalidParameterException(String.format("Symbols in alphabet %s are not unique", name));
         }
@@ -50,8 +52,12 @@ public enum Alphabet {
         return name;
     }
 
+    public int getAlphabetLength() {
+        return alphabetLength;
+    }
+
     public int getSymbolPos(final char symbol) {
-        for (int i = 0; i < symbols.length; i++) {
+        for (int i = 0; i < alphabetLength; i++) {
             if (symbols[i] == symbol) {
                 return i;
             }
@@ -59,33 +65,38 @@ public enum Alphabet {
         return -1;
     }
 
-    public char shift(final char symbol, final int offset) {
-        if (symbols.length == 0 || offset == 0) {
+    public char shift(final char symbol, final int key) {
+        if (alphabetLength == 0 || key == 0) {
             return symbol;
         }
+
         int symbolPos = getSymbolPos(symbol);
-        int shiftedPos = symbolPos + offset;
-        if (shiftedPos > symbols.length) {
-            shiftedPos = shiftedPos % symbols.length;
-        } else if (shiftedPos < 0) {
-            shiftedPos = symbols.length - (symbols.length - shiftedPos) % symbols.length;
+        if (symbolPos == -1) { // the symbol is not a letter or a known punctuation - pass it through
+            return symbol;
         }
+
+        int shiftedPos = symbolPos + key;
+        if (shiftedPos > alphabetLength) {
+            shiftedPos = shiftedPos % alphabetLength;
+        } else if (shiftedPos < 0) {
+            shiftedPos = alphabetLength - (alphabetLength - shiftedPos) % alphabetLength;
+        }
+
         return symbols[shiftedPos];
     }
 
-    public boolean isTextMatches(final String[] text) {
-        for (String line : text) {
-            for (int i = 0; i < line.length(); i++) {
-                char currChar = line.charAt(i);
-                if (Character.isLetter(currChar) && getSymbolPos(currChar) < 0) {
-                    return false;
-                }
+    public boolean isTextMatches(final char[] text) {
+        for (int i = 0; i < text.length; i++) {
+            char currChar = text[i];
+            if (Character.isLetter(currChar) && getSymbolPos(currChar) < 0) {
+                return false;
             }
         }
+
         return true;
     }
 
-    public static Alphabet detect(String[] text) {
+    public static Alphabet detect(char[] text) {
         for (Alphabet alphabet : Alphabet.values()) {
             if (alphabet.isTextMatches(text)) {
                 return alphabet;
