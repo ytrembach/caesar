@@ -2,12 +2,7 @@ package org.yt.jr.projects.alphabet;
 
 import java.security.InvalidParameterException;
 
-public enum Alphabet {
-
-    UNKNOWN(),
-    EN("en", "abcdefghijklmnopqrstuvwxyz"),
-    UKR("ukr", "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя");
-
+public class Alphabet {
     private final String name;
     private final char[] symbols;
     private final int alphabetLength;
@@ -87,15 +82,6 @@ public enum Alphabet {
             }
         }
         return true;
-    }
-
-    public static Alphabet detect(char[] text) {
-        for (Alphabet alphabet : Alphabet.values()) {
-            if (alphabet.isTextMatches(text)) {
-                return alphabet;
-            }
-        }
-        return UNKNOWN;
     }
 
     @Override

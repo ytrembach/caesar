@@ -1,6 +1,7 @@
 package org.yt.jr.projects;
 
 import org.yt.jr.projects.alphabet.Alphabet;
+import org.yt.jr.projects.alphabet.SupportedAlphabets;
 import org.yt.jr.projects.crypto.Caesar;
 
 import java.security.InvalidParameterException;
@@ -19,12 +20,12 @@ public class Main {
             System.out.print(currChar);
         }
 
-        Alphabet alphabet = Alphabet.detect(textToProcess);
-        if (alphabet == Alphabet.UNKNOWN) {
+        SupportedAlphabets detected = SupportedAlphabets.detect(textToProcess);
+        if (detected == SupportedAlphabets.UNSUPPORTED) {
             throw new InvalidParameterException("Alphabet detection failed");
         }
 
-        Caesar caesar = new Caesar(alphabet);
+        Caesar caesar = new Caesar(detected.getAlphabet());
         char[] resultText = caesar.process(textToProcess, key);
 
         for (char currChar : resultText) {
