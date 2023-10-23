@@ -1,13 +1,14 @@
 package org.yt.jr.projects;
 
 import org.yt.jr.projects.alphabet.SupportedAlphabets;
+import org.yt.jr.projects.crypto.BruteForce;
 import org.yt.jr.projects.crypto.Caesar;
 
 import java.security.InvalidParameterException;
 
 public class Main {
     public static void main(String[] args) {
-        int key = 13;
+        int key = 44;
         char[] textToProcess =
                 ("And so, the king is once again my guest\n" +
                 "And why is this?\n" +
@@ -31,10 +32,9 @@ public class Main {
             System.out.print(currChar);
         }
 
-        char[] reverseText = caesar.process(resultText, -key);
-        for (char currChar : reverseText) {
-            System.out.print(currChar);
-        }
+        BruteForce bruteForce = new BruteForce(caesar);
+        int candidate = bruteForce.search(resultText);
+        System.out.println(candidate);
 
     }
 }
