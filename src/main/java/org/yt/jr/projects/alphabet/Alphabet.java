@@ -5,32 +5,52 @@ import java.security.InvalidParameterException;
 public class Alphabet {
     private final String name;
     private final char[] symbols;
+    private final char[] vowels;
     private final int alphabetLength;
-    public final char[] PUNCTUATION = {'.', ',', '«', '»', '"', '\\', ':', '!', '?', ' '};
+    public final static char[] PUNCTUATION = {'.', ',', '«', '»', '"', '\\', ':', '!', '?'};
+
+    public static boolean isSign(final char ch) {
+        for (int i = 0; i < Alphabet.PUNCTUATION.length; i++) {
+            if (ch == Alphabet.PUNCTUATION[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     Alphabet() {
         this.name = "unknown";
         this.alphabetLength = 0;
         this.symbols = new char[0];
+        this.vowels = new char[0];
     }
 
-    Alphabet(final String name, final String letters) {
+    Alphabet(final String name, final String letters, final String vowels) {
         final char[] alphabetChars = letters.toCharArray();
-        if (isCharsUnique(alphabetChars)) {
+        if (checkCharsUnique(alphabetChars)) {
             this.name = name;
 
-            alphabetLength = letters.length() * 2 + PUNCTUATION.length; // small letters + capital letters + punctuation
+            // small letters + capital letters + punctuation count + space symbol
+            alphabetLength = letters.length() * 2 + PUNCTUATION.length + 1;
             symbols = new char[alphabetLength];
 
             System.arraycopy(letters.toUpperCase().toCharArray(), 0, symbols, 0, letters.length());
             System.arraycopy(letters.toLowerCase().toCharArray(), 0, symbols, letters.length(), letters.length());
             System.arraycopy(PUNCTUATION, 0, symbols, 2 * letters.length(), PUNCTUATION.length);
+            symbols[symbols.length - 1] = ' '; // add space to the end
+
+            if (checkVowelsInAlphabet(vowels.toCharArray())) {
+                this.vowels = vowels.toCharArray();
+            } else {
+                throw new InvalidParameterException(String.format("Vowels are not in alphabet %s", name));
+            }
+
         } else {
             throw new InvalidParameterException(String.format("Symbols in alphabet %s are not unique", name));
         }
     }
 
-    private boolean isCharsUnique(final char[] chars) {
+    private boolean checkCharsUnique(final char[] chars) {
         for (int i = 0; i < chars.length - 1; i++) {
             final char testedSymbol = chars[i];
             for (int j = i + 1; j < chars.length; j++) {
@@ -42,8 +62,26 @@ public class Alphabet {
         return true;
     }
 
+    private boolean checkVowelsInAlphabet(final char[] vowels) {
+        for (char vowel : vowels) {
+            if (getSymbolPos(vowel) == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public int getAlphabetLength() {
         return alphabetLength;
+    }
+
+    public boolean isVowel(final char symbol) {
+        for (char vowel : vowels) {
+            if (symbol == vowel) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getSymbolPos(final char symbol) {
@@ -66,7 +104,7 @@ public class Alphabet {
         }
 
         int shiftedPos = symbolPos + key;
-        if (shiftedPos > alphabetLength) {
+        if (shiftedPos >= alphabetLength) {
             shiftedPos = shiftedPos % alphabetLength;
         } else if (shiftedPos < 0) {
             shiftedPos = alphabetLength - (alphabetLength - shiftedPos) % alphabetLength;
