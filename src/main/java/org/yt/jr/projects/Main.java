@@ -1,6 +1,5 @@
 package org.yt.jr.projects;
 
-import org.yt.jr.projects.alphabet.Alphabet;
 import org.yt.jr.projects.alphabet.SupportedAlphabets;
 import org.yt.jr.projects.crypto.Caesar;
 

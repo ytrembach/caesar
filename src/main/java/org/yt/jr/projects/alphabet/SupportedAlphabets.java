@@ -5,7 +5,7 @@ public enum SupportedAlphabets {
     EN(new Alphabet("en", "abcdefghijklmnopqrstuvwxyz")),
     UKR(new Alphabet("ukr", "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя"));
 
-    private Alphabet alphabet;
+    final private Alphabet alphabet;
 
     SupportedAlphabets(Alphabet alphabet) {
         this.alphabet = alphabet;
