@@ -21,7 +21,6 @@ public class BruteForce {
             violations.put(testKey,
                     countSignBetweenTwoLetters(testResult) +
                             countConsonantSequences(testResult, 4));
-            System.out.println("Key: " + testKey + " - " + violations.get(testKey));
         }
         return getMinKey(violations);
     }
