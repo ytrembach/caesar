@@ -11,7 +11,7 @@ public abstract class UserInterface {
 
     public void processControls() {
         Control nextControl;
-        while ((nextControl = getNextControl()).getCmd() != Commands.EXIT) {
+        while ((nextControl = getNextControl()) != Control.EXIT) {
             Processor processor = nextControl.getCmd().getProcessor();
             String param = nextControl.getParam();
             if (processor != null) {
