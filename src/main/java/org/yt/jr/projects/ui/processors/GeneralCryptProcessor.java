@@ -5,26 +5,24 @@ import org.yt.jr.projects.file.FileService;
 import org.yt.jr.projects.lang.Languages;
 import org.yt.jr.projects.ui.Config;
 
-public abstract class CryptProcess {
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public abstract class GeneralCryptProcessor {
     protected FileService fileService;
     protected char[] textToProcess;
     private Languages language = Languages.UNSUPPORTED;
     protected Caesar caesar;
 
     public boolean prepare(final String outputPrefix) {
-        return checkConfig() && readSource(outputPrefix) && detectLanguage() && createCaesar();
-    }
-
-    private boolean checkConfig() {
-        final String checkConfigResult = Config.CONFIG.checkConfig();
-        if (!checkConfigResult.isEmpty()) {
-            System.out.printf("Check config failed (%s): ", checkConfigResult);
-            return false;
-        }
-        return true;
+        return readSource(outputPrefix) && detectLanguage() && createCaesar();
     }
 
     private boolean readSource(final String outputPrefix) {
+        Path inputFile = Config.CONFIG.getPath();
+        if (inputFile == null || !Files.exists(inputFile)) {
+            System.out.print("Input file not found or path to it is invaldi");
+        }
         fileService = new FileService(Config.CONFIG.getPath(), outputPrefix);
         textToProcess = fileService.read();
         return textToProcess != null;
