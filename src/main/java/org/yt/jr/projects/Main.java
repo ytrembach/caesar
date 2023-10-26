@@ -3,8 +3,6 @@ package org.yt.jr.projects;
 import org.yt.jr.projects.ui.UserInterface;
 import org.yt.jr.projects.ui.UserInterfaceCmdline;
 
-import java.security.InvalidParameterException;
-
 public class Main {
     public static void main(String[] args) {
 //        int key = 32;
@@ -40,17 +38,11 @@ public class Main {
 //        }
         UserInterface ui = null;
         if (args.length > 0) {
-            try {
-                if (args.length >= 2) {
-                    String cmd = args[0];
-                    String filePath = args[1];
-                    String key = args.length == 3 ? args[2] : "0";
-                    ui = new UserInterfaceCmdline(cmd, filePath, key);
-                }
-            } catch (InvalidParameterException e) {
-                System.out.println("Usage: caesar command filePath [key]");
-                System.out.println("\tcommand - ENCRYPT, DECRYPT, BRUTE_FORCE, BRUTE_FORCE_ALT");
-                System.out.println("\t[key] - integer, mandatory for ENCRYPT/DECRYPT");
+            if (args.length >= 2) {
+                String cmd = args[0];
+                String filePath = args[1];
+                String key = args.length == 3 ? args[2] : "0";
+                ui = new UserInterfaceCmdline(cmd, filePath, key);
             }
         }
         ui.processControls();
