@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileService {
-
     final private Path inputFile;
     final private Path outputFile;
 
@@ -28,7 +27,7 @@ public class FileService {
         return null;
     }
 
-    public boolean write(char[] text) {
+    public boolean write(final char[] text) {
         try (BufferedWriter writer = Files.newBufferedWriter(outputFile)) {
             writer.write(text);
         } catch (IOException e) {

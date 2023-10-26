@@ -10,10 +10,10 @@ public class UserInterfaceCmdline extends UserInterface {
         if (!queue.isEmpty()) {
             return queue.remove(0);
         }
-        return(Control.EXIT);
+        return (Control.EXIT);
     }
 
-    public UserInterfaceCmdline(String userCmd, String userPath, String userKey) {
+    public UserInterfaceCmdline(final String userCmd, final String userPath, final String userKey) {
         queue.add(new Control(Commands.SET_PATH, userPath));
         if (!"0".equals(userKey)) {
             queue.add(new Control(Commands.SET_KEY, userKey));

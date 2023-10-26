@@ -124,8 +124,6 @@ public class Alphabet {
 
     @Override
     public String toString() {
-        return "Alphabet{" +
-                "name='" + name + '\'' +
-                '}';
+        return "Alphabet{" + "name='" + name + '\'' + '}';
     }
 }

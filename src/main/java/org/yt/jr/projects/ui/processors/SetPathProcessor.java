@@ -7,7 +7,7 @@ import java.nio.file.Path;
 
 public class SetPathProcessor implements Processor {
     public int process(final String fileName) {
-        Path path = Path.of(fileName);
+        final Path path = Path.of(fileName);
         if (Files.exists(path)) {
             Config.CONFIG.setPath(path);
             return 0;

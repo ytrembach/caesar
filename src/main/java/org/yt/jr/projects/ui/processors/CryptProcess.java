@@ -11,12 +11,12 @@ public abstract class CryptProcess {
     private Languages language = Languages.UNSUPPORTED;
     protected Caesar caesar;
 
-    public boolean prepare(String outputPrefix) {
+    public boolean prepare(final String outputPrefix) {
         return checkConfig() && readSource(outputPrefix) && detectLanguage() && createCaesar();
     }
 
     private boolean checkConfig() {
-        String checkConfigResult = Config.CONFIG.checkConfig();
+        final String checkConfigResult = Config.CONFIG.checkConfig();
         if (!checkConfigResult.isEmpty()) {
             System.out.printf("Check config failed (%s): ", checkConfigResult);
             return false;
@@ -37,6 +37,7 @@ public abstract class CryptProcess {
         }
         return language != Languages.UNSUPPORTED;
     }
+
     private boolean createCaesar() {
         caesar = new Caesar(language.getAlphabet());
         return true;

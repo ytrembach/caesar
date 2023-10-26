@@ -1,10 +1,10 @@
 package org.yt.jr.projects.ui;
 
 public class Control {
-    private Commands cmd;
-    private String param;
+    final private Commands cmd;
+    final private String param;
 
-    final public static Control EXIT = new Control(Commands.EXIT,"");
+    final public static Control EXIT = new Control(Commands.EXIT, "");
 
     public Control(Commands cmd, String param) {
         this.cmd = cmd;

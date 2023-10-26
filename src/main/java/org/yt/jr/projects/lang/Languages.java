@@ -2,8 +2,8 @@ package org.yt.jr.projects.lang;
 
 public enum Languages {
     UNSUPPORTED(new Alphabet()),
-    EN(new Alphabet("en", "abcdefghijklmnopqrstuvwxyz","aeiou")),
-    UKR(new Alphabet("ukr", "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя","аеєиіїоуюя"));
+    EN(new Alphabet("en", "abcdefghijklmnopqrstuvwxyz", "aeiou")),
+    UKR(new Alphabet("ukr", "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя", "аеєиіїоуюя"));
 
     final private Alphabet alphabet;
 

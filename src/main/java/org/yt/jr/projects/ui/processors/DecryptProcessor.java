@@ -7,7 +7,7 @@ public class DecryptProcessor extends CryptProcess implements Processor {
         if (!prepare("[DECRYPTED]")) {
             return -1;
         }
-        char[] decryptedText = caesar.process(textToProcess, -Config.CONFIG.getKey());
+        final char[] decryptedText = caesar.process(textToProcess, -Config.CONFIG.getKey());
         if (!fileService.write(decryptedText)) {
             return -1;
         }

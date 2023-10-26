@@ -1,6 +1,7 @@
 package org.yt.jr.projects.crypto;
 
 import org.yt.jr.projects.lang.Alphabet;
+
 import java.util.HashMap;
 
 public class BruteForce {
@@ -9,7 +10,6 @@ public class BruteForce {
 
     public BruteForce(final Caesar caesar) {
         this.caesar = caesar;
-
     }
 
     public int search(final char[] encryptedText) {
@@ -18,9 +18,7 @@ public class BruteForce {
 
         for (int testKey = 1; testKey < caesar.getAlphabet().getAlphabetLength(); testKey++) {
             final char[] testResult = caesar.process(encryptedText, -testKey);
-            violations.put(testKey,
-                    countSignBetweenTwoLetters(testResult) +
-                            countConsonantSequences(testResult, 4));
+            violations.put(testKey, countSignBetweenTwoLetters(testResult) + countConsonantSequences(testResult, 4));
         }
         return getMinKey(violations);
     }
