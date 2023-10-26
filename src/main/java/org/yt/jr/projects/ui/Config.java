@@ -1,7 +1,6 @@
 package org.yt.jr.projects.ui;
 
-import org.yt.jr.projects.alphabet.Languages;
-
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Config {
@@ -30,11 +29,16 @@ public class Config {
         this.key = key;
     }
 
-    public boolean checkConfig() {
+    public String checkConfig() {
         if (path == null) {
-            System.out.println("Path to file not set");
-            return false;
+            return "Path to file not set";
         }
-        return true;
+        if (!Files.exists(path)) {
+            return "File not found";
+        }
+        if (key == 0) {
+            return "Key not set or set to 0";
+        }
+        return "";
     }
 }
