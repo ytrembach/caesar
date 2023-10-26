@@ -2,6 +2,8 @@ package org.yt.jr.projects.ui;
 
 import org.yt.jr.projects.ui.processors.Processor;
 
+import java.security.InvalidParameterException;
+
 public abstract class UserInterface {
     protected abstract Control getNextControl();
 
@@ -11,8 +13,9 @@ public abstract class UserInterface {
             Processor processor = nextControl.getCmd().getProcessor();
             String param = nextControl.getParam();
             if (processor != null) {
-                System.out.printf("%s: %s%n",nextControl.getCmd().getTitle(), param);
-                processor.process(param);
+                System.out.printf("%nDO %s: %s%n",nextControl.getCmd().getTitle(), param);
+                int returnCode = processor.process(param);
+                System.out.println(returnCode==0 ? "Ok" : "Failed");
             }
         }
 
