@@ -1,4 +1,4 @@
-package org.yt.jr.projects.alphabet;
+package org.yt.jr.projects.lang;
 
 public enum Languages {
     UNSUPPORTED(new Alphabet()),
