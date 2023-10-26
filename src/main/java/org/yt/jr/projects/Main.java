@@ -1,8 +1,5 @@
 package org.yt.jr.projects;
 
-import org.yt.jr.projects.alphabet.SupportedAlphabets;
-import org.yt.jr.projects.crypto.BruteForce;
-import org.yt.jr.projects.crypto.Caesar;
 import org.yt.jr.projects.ui.UserInterface;
 import org.yt.jr.projects.ui.UserInterfaceCmdline;
 
