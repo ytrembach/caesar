@@ -1,6 +1,6 @@
 package org.yt.jr.projects.crypto;
 
-import org.yt.jr.projects.alphabet.Alphabet;
+import org.yt.jr.projects.lang.Alphabet;
 
 public class Caesar {
     private final Alphabet alphabet;
