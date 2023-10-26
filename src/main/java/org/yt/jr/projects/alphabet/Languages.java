@@ -1,13 +1,13 @@
 package org.yt.jr.projects.alphabet;
 
-public enum SupportedAlphabets {
+public enum Languages {
     UNSUPPORTED(new Alphabet()),
     EN(new Alphabet("en", "abcdefghijklmnopqrstuvwxyz","aeiou")),
     UKR(new Alphabet("ukr", "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя","аеєиіїоуюя"));
 
     final private Alphabet alphabet;
 
-    SupportedAlphabets(Alphabet alphabet) {
+    Languages(Alphabet alphabet) {
         this.alphabet = alphabet;
     }
 
@@ -15,10 +15,10 @@ public enum SupportedAlphabets {
         return alphabet;
     }
 
-    public static SupportedAlphabets detect(char[] text) {
-        for (SupportedAlphabets value : values()) {
-            if (value.alphabet.isTextMatches(text)) {
-                return value;
+    public static Languages detect(char[] text) {
+        for (Languages language : values()) {
+            if (language.alphabet.isTextMatches(text)) {
+                return language;
             }
         }
         return UNSUPPORTED;
