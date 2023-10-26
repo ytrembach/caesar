@@ -30,10 +30,11 @@ public class FileService {
     public boolean write(final char[] text) {
         try (BufferedWriter writer = Files.newBufferedWriter(outputFile)) {
             writer.write(text);
+            return true;
         } catch (IOException e) {
             System.out.println("IO Exception" + e.getMessage());
         }
-        return true;
+        return false;
     }
 
 

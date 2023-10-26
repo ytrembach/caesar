@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class UserInterfaceCmdline extends UserInterface {
 
-    ArrayList<Control> queue = new ArrayList<>();
+    final ArrayList<Control> queue = new ArrayList<>();
 
     protected Control getNextControl() {
         if (!queue.isEmpty()) {

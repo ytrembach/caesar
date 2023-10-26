@@ -19,7 +19,4 @@ public abstract class UserInterface {
 
         System.out.println("Bye!");
     }
-
-    ;
-
 }
