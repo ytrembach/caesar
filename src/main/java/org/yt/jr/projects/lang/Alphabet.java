@@ -1,4 +1,4 @@
-package org.yt.jr.projects.alphabet;
+package org.yt.jr.projects.lang;
 
 import java.security.InvalidParameterException;
 
