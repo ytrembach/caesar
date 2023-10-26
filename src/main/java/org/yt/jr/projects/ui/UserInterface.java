@@ -6,8 +6,8 @@ public abstract class UserInterface {
     protected abstract Control getNextControl();
 
     public void processControls() {
-        Control nextControl;
-        while ((nextControl = getNextControl()) != Control.EXIT) {
+        Control nextControl = getNextControl();
+        while (nextControl != null && nextControl!= Control.EXIT) {
             Processor processor = nextControl.getCmd().getProcessor();
             String param = nextControl.getParam();
             if (processor != null) {
@@ -15,6 +15,7 @@ public abstract class UserInterface {
                 int returnCode = processor.process(param);
                 System.out.println(returnCode == 0 ? "Ok" : "Failed");
             }
+            nextControl = getNextControl();
         }
 
         System.out.println("Bye!");
