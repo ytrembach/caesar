@@ -29,16 +29,4 @@ public class Config {
         this.key = key;
     }
 
-    public String checkConfig() {
-        if (path == null) {
-            return "Path to file not set";
-        }
-        if (!Files.exists(path)) {
-            return "File not found";
-        }
-        if (key == 0) {
-            return "Key not set or set to 0";
-        }
-        return "";
-    }
 }
