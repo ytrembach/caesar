@@ -8,7 +8,7 @@ public enum Commands {
     SET_KEY("Set the key", new SetKeyProcessor(), ""),
     ENCRYPT("Encrypt file", new EncryptProcessor(), "ENCRYPT"),
     DECRYPT("Decrypt by key", new DecryptProcessor(), "DECRYPT"),
-    BRUTEFORCE_ALT("Decrypt by alternate brute force method", null, "BRUTE_FORCE_ALT"),
+    BRUTEFORCE_ALT("Decrypt by alternate brute force method", new BruteForceAltProcessor(), "BRUTE_FORCE_ALT"),
     BRUTEFORCE_FREQ("Decrypt by frequency analysis brute force", null, "BRUTE_FORCE");
 
     final private String title;
