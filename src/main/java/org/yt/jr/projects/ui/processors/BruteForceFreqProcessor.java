@@ -14,10 +14,11 @@ public class BruteForceFreqProcessor extends GeneralCryptProcessor implements Pr
 
             final char[] decryptedText = caesar.process(textToProcess, -candidateKey);
             if (!fileService.write(decryptedText)) {
+                System.out.print("Could not write destination file: ");
                 return -1;
             }
         } else {
-            System.out.printf("Frequencies not configured for language %s",caesar.getAlphabet().getName());
+            System.out.printf("Frequencies not configured for language %s: ",caesar.getAlphabet().getName());
             return -1;
         }
         return 0;
