@@ -1,9 +1,8 @@
 package org.yt.jr.projects.ui.processors;
 
-import org.yt.jr.projects.ui.Config;
 import org.yt.jr.projects.crypto.BruteForce;
 
-public class BruteForceAltProcessor extends GeneralCryptProcessor implements Processor {
+public class BruteForceAltProcessor extends GeneralCryptProcessor implements Processable {
     public int process(final String keyStr) {
         if (!prepare("[DECRYPTED]")) {
             return -1;

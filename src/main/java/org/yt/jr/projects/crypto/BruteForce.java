@@ -18,7 +18,10 @@ public class BruteForce {
 
         for (int testKey = 1; testKey < caesar.getAlphabet().getAlphabetLength(); testKey++) {
             final char[] testResult = caesar.process(encryptedText, -testKey);
-            violations.put(testKey, countSignBetweenTwoLetters(testResult) + countConsonantSequences(testResult, 4));
+            violations.put(testKey,
+                    countSignBetweenTwoLetters(testResult) +
+                            countConsonantSequences(testResult, 3) +
+                            countVowelSequences(testResult, 3));
         }
         return getMinKey(violations);
     }
@@ -35,21 +38,29 @@ public class BruteForce {
     }
 
     private int countConsonantSequences(final char[] text, final int checkLen) {
+        return countSequences(text, checkLen, true);
+    }
+    private int countVowelSequences(final char[] text, final int checkLen) {
+        return countSequences(text, checkLen, false);
+    }
+
+    private int countSequences(final char[] text, final int checkLen, final boolean checkConsonants) {
         int count = 0;
         final Alphabet alphabet = caesar.getAlphabet();
-        boolean prevConsonant = false;
+        boolean prevInSeq = false;
         int seqLen = 0;
 
         for (char symbol : text) {
-            if (!alphabet.isVowel(symbol)) {
+            if (checkConsonants && !alphabet.isVowel(symbol) ||
+                    !checkConsonants && alphabet.isVowel(symbol)) {
                 seqLen++;
-                if (prevConsonant && seqLen >= checkLen) {
+                if (prevInSeq && seqLen >= checkLen) {
                     count++;
                 }
-                prevConsonant = true;
+                prevInSeq = true;
             } else {
                 seqLen = 0;
-                prevConsonant = false;
+                prevInSeq = false;
             }
 
         }
