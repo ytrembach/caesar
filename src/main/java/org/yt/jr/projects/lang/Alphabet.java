@@ -54,6 +54,10 @@ public class Alphabet {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
     private boolean checkSymbolsUnique(final char[] symbolsSet) {
         for (int i = 0; i < symbolsSet.length - 1; i++) {
             final char testedSymbol = symbolsSet[i];

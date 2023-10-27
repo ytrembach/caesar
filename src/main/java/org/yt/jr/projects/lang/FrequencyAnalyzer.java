@@ -13,6 +13,10 @@ public class FrequencyAnalyzer {
         this.frequencies = new HashMap<>();
     }
 
+    public boolean hasFrequencies() {
+        return !frequencies.isEmpty();
+    }
+
     public void setFrequencies(char[] symbols, double[] freqArray) {
         for (int i = 0; i < symbols.length; i++) {
             char capitalizedSymbol = Character.toUpperCase(symbols[i]);

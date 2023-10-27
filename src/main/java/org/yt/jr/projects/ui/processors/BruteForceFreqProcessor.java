@@ -9,11 +9,15 @@ public class BruteForceFreqProcessor extends GeneralCryptProcessor implements Pr
         }
 
         final FrequencyAnalyzer frequencyAnalyzer = caesar.getAlphabet().getFrequencyAnalyzer();
-        final int candidateKey = frequencyAnalyzer.search(textToProcess);
+        if (frequencyAnalyzer.hasFrequencies()) {
+            final int candidateKey = frequencyAnalyzer.search(textToProcess);
 
-        final char[] decryptedText = caesar.process(textToProcess, -candidateKey);
-        if (!fileService.write(decryptedText)) {
-            return -1;
+            final char[] decryptedText = caesar.process(textToProcess, -candidateKey);
+            if (!fileService.write(decryptedText)) {
+                return -1;
+            }
+        } else {
+            System.out.printf("Frequencies not configured for language %s",caesar.getAlphabet().getName());
         }
         return 0;
     }
