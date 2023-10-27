@@ -1,7 +1,5 @@
 package org.yt.jr.projects.ui;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class UserInterfaceCmdline extends UserInterface {
@@ -20,10 +18,7 @@ public class UserInterfaceCmdline extends UserInterface {
             queue.add(new Control(Commands.SET_KEY, userKey));
         }
 
-        Path path = Path.of(userPath);
-        if (Files.exists(path) || Files.isRegularFile(path)) {
-            queue.add(new Control(Commands.SET_PATH, userPath));
-        }
+        queue.add(new Control(Commands.SET_PATH, userPath));
 
         Control control = Control.BAD_COMMAND;
         for (Commands c : Commands.values()) {
