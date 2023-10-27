@@ -18,6 +18,7 @@ public class BruteForceFreqProcessor extends GeneralCryptProcessor implements Pr
             }
         } else {
             System.out.printf("Frequencies not configured for language %s",caesar.getAlphabet().getName());
+            return -1;
         }
         return 0;
     }
