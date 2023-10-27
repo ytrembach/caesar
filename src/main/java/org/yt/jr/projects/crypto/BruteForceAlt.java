@@ -4,11 +4,11 @@ import org.yt.jr.projects.lang.Alphabet;
 
 import java.util.HashMap;
 
-public class BruteForce {
+public class BruteForceAlt {
 
     private final Caesar caesar;
 
-    public BruteForce(final Caesar caesar) {
+    public BruteForceAlt(final Caesar caesar) {
         this.caesar = caesar;
     }
 

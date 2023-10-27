@@ -1,6 +1,6 @@
 package org.yt.jr.projects.ui.processors;
 
-import org.yt.jr.projects.crypto.BruteForce;
+import org.yt.jr.projects.crypto.BruteForceAlt;
 
 public class BruteForceAltProcessor extends GeneralCryptProcessor implements Processable {
     public int process(final String keyStr) {
@@ -8,8 +8,8 @@ public class BruteForceAltProcessor extends GeneralCryptProcessor implements Pro
             return -1;
         }
 
-        final BruteForce bruteForce = new BruteForce(caesar);
-        final int candidateKey = bruteForce.search(textToProcess);
+        final BruteForceAlt bruteForceAlt = new BruteForceAlt(caesar);
+        final int candidateKey = bruteForceAlt.search(textToProcess);
 
         final char[] decryptedText = caesar.process(textToProcess, -candidateKey);
         if (!fileService.write(decryptedText)) {
