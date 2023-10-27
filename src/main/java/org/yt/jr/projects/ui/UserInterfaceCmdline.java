@@ -1,5 +1,7 @@
 package org.yt.jr.projects.ui;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class UserInterfaceCmdline extends UserInterface {
@@ -14,16 +16,23 @@ public class UserInterfaceCmdline extends UserInterface {
     }
 
     public UserInterfaceCmdline(final String userCmd, final String userPath, final String userKey) {
-        queue.add(new Control(Commands.SET_PATH, userPath));
         if (!"0".equals(userKey)) {
             queue.add(new Control(Commands.SET_KEY, userKey));
         }
 
-        for (Commands command : Commands.values()) {
-            if (command.getCmd().equals(userCmd.toUpperCase())) {
-                queue.add(new Control(command, ""));
+        Path path = Path.of(userPath);
+        if (Files.exists(path) || Files.isRegularFile(path)) {
+            queue.add(new Control(Commands.SET_PATH, userPath));
+        }
+
+        Control control = Control.BAD_COMMAND;
+        for (Commands c : Commands.values()) {
+            if (c.getCmd().equals(userCmd.toUpperCase())) {
+                control = new Control(c, "");
+                break;
             }
         }
+        queue.add(control);
     }
 
 }

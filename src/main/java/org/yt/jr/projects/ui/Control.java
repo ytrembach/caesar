@@ -4,6 +4,8 @@ public class Control {
     final private Commands cmd;
     final private String param;
 
+    final public static Control BAD_COMMAND = new Control(null, "");
+
     final public static Control EXIT = new Control(Commands.EXIT, "");
 
     public Control(Commands cmd, String param) {
