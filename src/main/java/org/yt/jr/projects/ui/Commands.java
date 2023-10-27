@@ -12,10 +12,10 @@ public enum Commands {
     BRUTEFORCE_FREQ("Decrypt by frequency analysis brute force", null, "BRUTE_FORCE");
 
     final private String title;
-    final private Processor processor;
+    final private Processable processor;
     final private String cmd;
 
-    Commands(final String title, final Processor processor, final String cmd) {
+    Commands(final String title, final Processable processor, final String cmd) {
         this.title = title;
         this.processor = processor;
         this.cmd = cmd;
@@ -25,7 +25,7 @@ public enum Commands {
         return title;
     }
 
-    public Processor getProcessor() {
+    public Processable getProcessor() {
         return processor;
     }
 

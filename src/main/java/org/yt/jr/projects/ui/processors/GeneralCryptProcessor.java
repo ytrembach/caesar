@@ -21,7 +21,7 @@ public abstract class GeneralCryptProcessor {
     private boolean readSource(final String outputPrefix) {
         Path inputFile = Config.CONFIG.getPath();
         if (inputFile == null || !Files.exists(inputFile)) {
-            System.out.print("Input file not found or path to it is invaldi");
+            System.out.print("Input file not found or path to it is invalid");
         }
         fileService = new FileService(Config.CONFIG.getPath(), outputPrefix);
         textToProcess = fileService.read();

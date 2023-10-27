@@ -5,7 +5,7 @@ import org.yt.jr.projects.ui.Config;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class SetPathProcessor implements Processor {
+public class SetPathProcessor implements Processable {
     public int process(final String fileName) {
         final Path path = Path.of(fileName);
         if (Files.exists(path)) {

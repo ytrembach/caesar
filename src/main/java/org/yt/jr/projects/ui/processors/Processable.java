@@ -1,5 +1,5 @@
 package org.yt.jr.projects.ui.processors;
 
-public interface Processor {
+public interface Processable {
     int process(String param);
 }

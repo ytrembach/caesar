@@ -2,7 +2,7 @@ package org.yt.jr.projects.ui.processors;
 
 import org.yt.jr.projects.ui.Config;
 
-public class DecryptProcessor extends GeneralCryptProcessor implements Processor {
+public class DecryptProcessor extends GeneralCryptProcessor implements Processable {
     public int process(final String keyStr) {
         if (!prepare("[DECRYPTED]")) {
             return -1;

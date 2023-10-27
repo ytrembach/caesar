@@ -2,7 +2,7 @@ package org.yt.jr.projects.ui.processors;
 
 import org.yt.jr.projects.ui.Config;
 
-public class SetKeyProcessor implements Processor {
+public class SetKeyProcessor implements Processable {
     public int process(final String keyStr) {
         final int key;
         try {
