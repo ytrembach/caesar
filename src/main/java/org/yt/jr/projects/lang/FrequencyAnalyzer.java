@@ -37,7 +37,7 @@ public class FrequencyAnalyzer {
                     testFreq.replace(symbolPos, testFreq.get(symbolPos) + 1);
                 }
             }
-            testFreq.replaceAll((k, v) -> v /= encryptedText.length);
+            testFreq.replaceAll((k, v) -> v / encryptedText.length);
 
             double distance = 0;
             for (int symbolPos : testFreq.keySet()) {

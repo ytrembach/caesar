@@ -1,6 +1,5 @@
 package org.yt.jr.projects.ui.processors;
 
-import org.yt.jr.projects.crypto.BruteForceAlt;
 import org.yt.jr.projects.lang.FrequencyAnalyzer;
 
 public class BruteForceFreqProcessor extends GeneralCryptProcessor implements Processable {
