@@ -7,6 +7,7 @@ public class Alphabet {
     private final char[] symbols;
     private final char[] vowels;
     private final int alphabetLength;
+    private final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer(this);
     public final static char[] PUNCTUATION = {'.', ',', '«', '»', '"', '\\', ':', '!', '?'};
 
     public static boolean isSign(final char ch) {
@@ -25,9 +26,9 @@ public class Alphabet {
         this.vowels = new char[0];
     }
 
-    Alphabet(final String name, final String letters, final String vowels) {
+    Alphabet(final String name, final String letters, final String vowels, final double[] vowelsFrequencies) {
         final char[] alphabetChars = letters.toCharArray();
-        if (checkCharsUnique(alphabetChars)) {
+        if (checkSymbolsUnique(alphabetChars)) {
             this.name = name;
 
             // small letters + capital letters + punctuation count + space symbol
@@ -39,7 +40,7 @@ public class Alphabet {
             System.arraycopy(PUNCTUATION, 0, symbols, 2 * letters.length(), PUNCTUATION.length);
             symbols[symbols.length - 1] = ' '; // add space to the end
 
-            if (checkVowelsInAlphabet(vowels.toCharArray())) {
+            if (checkSymbolsInAlphabet(vowels.toCharArray())) {
                 this.vowels = vowels.toCharArray();
             } else {
                 throw new InvalidParameterException(String.format("Vowels are not in alphabet %s", name));
@@ -48,13 +49,16 @@ public class Alphabet {
         } else {
             throw new InvalidParameterException(String.format("Symbols in alphabet %s are not unique", name));
         }
+        if (vowelsFrequencies != null && vowelsFrequencies.length == vowels.length()) {
+            frequencyAnalyzer.setFrequencies(vowels.toCharArray(), vowelsFrequencies);
+        }
     }
 
-    private boolean checkCharsUnique(final char[] chars) {
-        for (int i = 0; i < chars.length - 1; i++) {
-            final char testedSymbol = chars[i];
-            for (int j = i + 1; j < chars.length; j++) {
-                if (testedSymbol == chars[j]) {
+    private boolean checkSymbolsUnique(final char[] symbolsSet) {
+        for (int i = 0; i < symbolsSet.length - 1; i++) {
+            final char testedSymbol = symbolsSet[i];
+            for (int j = i + 1; j < symbolsSet.length; j++) {
+                if (testedSymbol == symbolsSet[j]) {
                     return false;
                 }
             }
@@ -62,9 +66,9 @@ public class Alphabet {
         return true;
     }
 
-    private boolean checkVowelsInAlphabet(final char[] vowels) {
-        for (char vowel : vowels) {
-            if (getSymbolPos(vowel) == -1) {
+    private boolean checkSymbolsInAlphabet(final char[] symbolSet) {
+        for (char symbol : symbolSet) {
+            if (getSymbolPos(symbol) == -1) {
                 return false;
             }
         }
@@ -73,6 +77,10 @@ public class Alphabet {
 
     public int getAlphabetLength() {
         return alphabetLength;
+    }
+
+    public FrequencyAnalyzer getFrequencyAnalyzer() {
+        return frequencyAnalyzer;
     }
 
     public boolean isVowel(final char symbol) {

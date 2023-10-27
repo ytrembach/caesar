@@ -1,9 +1,20 @@
 package org.yt.jr.projects.lang;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
+
 public enum Languages {
     UNSUPPORTED(new Alphabet()),
-    EN(new Alphabet("en", "abcdefghijklmnopqrstuvwxyz", "aeiou")),
-    UKR(new Alphabet("ukr", "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя", "аеєиіїоуюя"));
+    EN(new Alphabet("en",
+            "abcdefghijklmnopqrstuvwxyz",
+            "aeiou",
+            null)),
+    UKR(new Alphabet("ukr",
+            "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя",
+            "аеєиіїоуюя",
+            new double[] { 0.064, 0.042, 0.005, 0.055 ,0.044, 0.010, 0.086, 0.027, 0.008, 0.019}
+            ));
 
     final private Alphabet alphabet;
 

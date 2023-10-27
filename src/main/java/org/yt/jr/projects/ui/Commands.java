@@ -9,7 +9,7 @@ public enum Commands {
     ENCRYPT("Encrypt file", new EncryptProcessor(), "ENCRYPT"),
     DECRYPT("Decrypt by key", new DecryptProcessor(), "DECRYPT"),
     BRUTEFORCE_ALT("Decrypt by alternate brute force method", new BruteForceAltProcessor(), "BRUTE_FORCE_ALT"),
-    BRUTEFORCE_FREQ("Decrypt by frequency analysis brute force", null, "BRUTE_FORCE");
+    BRUTEFORCE_FREQ("Decrypt by frequency analysis brute force", new BruteForceFreqProcessor(), "BRUTE_FORCE");
 
     final private String title;
     final private Processable processor;
