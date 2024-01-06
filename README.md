@@ -1,6 +1,6 @@
 # Caesar
 
-JavaRush University, module 1, final project
+Java University, module 1, final project
 
 # Features:
 
