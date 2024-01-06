@@ -2,7 +2,7 @@
 
 Java University, module 1, final project
 
-# Features:
+# Features
 
 - caesar cipher implementation
 - multiple languages support (en, ukr ready)
